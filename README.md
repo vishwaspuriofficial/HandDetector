@@ -1,5 +1,5 @@
 # HandDetector
-A program that detects the 22 unique points on your body on a live stream camera!
+A program that detects the 22 unique points on your hand on a live stream camera!
 
 It uses mediapipe (by Google) and its pretrained models with a data set of thousands of hand photos to determine the unique 22 points in our hands.
 
