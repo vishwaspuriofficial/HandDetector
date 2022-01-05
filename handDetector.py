@@ -56,13 +56,16 @@ def handDetector():
         },
     )
 
-
     # Info Block
     st.write("If camera doesn't turn on, please ensure that your camera permissions are on!")
     with st.expander("Steps to enable permission"):
         st.write("1. Click the lock button at the top left of the page")
         st.write("2. Slide the camera slider to on")
         st.write("3. Reload your page!")
+
+    st.subheader("Testimonials")
+    st.image("testimonials.png")
+    st.caption("MediaPipe ML Solutions, https://google.github.io/mediapipe/solutions/hands")
 
 if __name__ == "__main__":
     handDetector()
