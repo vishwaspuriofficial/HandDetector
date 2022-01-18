@@ -1,10 +1,17 @@
+#Title: HAND DETECTOR
+#Developer: Vishwas Puri
+#Purpose: A program that detects the 22 unique points on your hand on a live stream camera!
+
+#It uses mediapipe (by Google) and its pretrained models with a data set of thousands of hand photos to determine the unique 22 points in our hands.
+
+#This program is made using python supported by streamlit.
 import streamlit as st
 import mediapipe as mp
 import cv2
 st.set_page_config(layout="wide")
 col = st.empty()
 
-
+#defining mediapipe's inbuilt hand recogignition models
 mpHands = mp.solutions.hands
 hands = mpHands.Hands()
 mpDraw = mp.solutions.drawing_utils
@@ -31,17 +38,19 @@ def handDetector():
     class OpenCVVideoProcessor(VideoProcessorBase):
         def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
-
+            #converting image to rgb
             imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            #find hands in the image
             results = hands.process(imgRGB)
 
+            #draw points over the 22 recognized hand points
             if results.multi_hand_landmarks:
                 for handLms in results.multi_hand_landmarks:
                     mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
             return av.VideoFrame.from_ndarray(img, format="bgr24")
 
-
+    #setting up streamlit camera configuration
     webrtc_ctx = webrtc_streamer(
         key="opencv-filter",
         mode=WebRtcMode.SENDRECV,
